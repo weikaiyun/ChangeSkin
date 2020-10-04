@@ -2,11 +2,13 @@
 
 简单方便的Android换肤库
 
+使用方式见Demo
+
 #####  如有使用问题欢迎提交issues
 
 ### LICENSE
 ```
-Copyright 2019 weikaiyun
+Copyright 2020 weikaiyun
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
