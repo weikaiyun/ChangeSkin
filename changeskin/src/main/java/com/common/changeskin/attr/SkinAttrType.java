@@ -12,8 +12,7 @@ import com.common.changeskin.ResourceManager;
 import com.common.changeskin.SkinManager;
 
 
-public enum SkinAttrType
-{
+public enum SkinAttrType {
     BACKGROUND("background") {
             @Override
             public void apply(View view, String resName) {
