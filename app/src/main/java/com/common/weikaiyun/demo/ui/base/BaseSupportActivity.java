@@ -21,6 +21,7 @@ public abstract class BaseSupportActivity extends SupportActivity {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+        SkinManager.INSTANCE.apply(this);
         initView(savedInstanceState);
         initData(savedInstanceState);
     }

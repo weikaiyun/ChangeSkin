@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.common.changeskin.SkinManager;
 import com.weikaiyun.fragmentation.SupportFragment;
 
 abstract public class BaseSupportFragment extends SupportFragment {
@@ -20,6 +21,7 @@ abstract public class BaseSupportFragment extends SupportFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        SkinManager.INSTANCE.apply(this);
         initView(view, savedInstanceState);
         initData(view, savedInstanceState);
     }

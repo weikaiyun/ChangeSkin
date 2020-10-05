@@ -6,6 +6,7 @@ import android.content.pm.PackageInfo
 import android.content.res.Resources
 import android.text.TextUtils
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.common.changeskin.attr.SkinAttrSupport
 import com.common.changeskin.attr.SkinView
 import com.common.changeskin.callback.ISkinChangingCallback
@@ -169,24 +170,29 @@ object SkinManager {
         }
     }
 
-    fun register(activity: Activity) {
-        mActivities.add(activity)
-        activity.findViewById<View>(android.R.id.content)
-            .post { apply(activity) }
-    }
-
-    fun unregister(activity: Activity) {
-        mActivities.remove(activity)
+    fun apply(fragment: Fragment) {
+        val skinViews = SkinAttrSupport.getSkinViews(fragment)
+        for (skinView in skinViews) {
+            skinView.apply()
+        }
     }
 
     /**
      * apply for dynamic construct view
      */
-    fun injectSkin(view: View) {
+    fun apply(view: View) {
         val skinViews: List<SkinView> = ArrayList()
         SkinAttrSupport.addSkinViews(view, skinViews)
         for (skinView in skinViews) {
             skinView.apply()
         }
+    }
+
+    fun register(activity: Activity) {
+        mActivities.add(activity)
+    }
+
+    fun unregister(activity: Activity) {
+        mActivities.remove(activity)
     }
 }

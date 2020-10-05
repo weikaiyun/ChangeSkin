@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
 import com.common.changeskin.constant.SkinConfig;
 import com.weikaiyun.changeskin.R;
 
@@ -31,6 +33,16 @@ public class SkinAttrSupport {
         List<SkinView> skinViews = new ArrayList<>();
         ViewGroup content = activity.findViewById(android.R.id.content);
         addSkinViews(content, skinViews);
+        return skinViews;
+    }
+
+    /**
+     * 传入fragment，找到root元素，递归遍历所有的子View，根据tag命名，记录需要换肤的View
+     */
+    public static List<SkinView> getSkinViews(Fragment fragment) {
+        List<SkinView> skinViews = new ArrayList<>();
+        View root = fragment.getView();
+        addSkinViews(root, skinViews);
         return skinViews;
     }
 
