@@ -130,9 +130,9 @@ object SkinManager {
         GlobalScope.launch(Dispatchers.Default) {
             try {
                 loadPlugin(skinPluginPath, skinPluginPkg)
+                updatePluginInfo(skinPluginPath, skinPluginPkg)
                 withContext(Dispatchers.Main) {
                     try {
-                        updatePluginInfo(skinPluginPath, skinPluginPkg)
                         notifyChangedListeners()
                         callback.onComplete()
                     } catch (e: Exception) {
