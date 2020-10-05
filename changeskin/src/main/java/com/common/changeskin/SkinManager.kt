@@ -3,8 +3,6 @@ package com.common.changeskin
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
-import android.content.res.AssetManager
 import android.content.res.Resources
 import android.text.TextUtils
 import android.view.View
@@ -48,11 +46,12 @@ object SkinManager {
     }
 
     private fun loadPlugin(skinPath: String, skinPkgName: String) {
-        val assetManager = AssetManager::class.java.newInstance()
-        val addAssetPath = assetManager.javaClass.getMethod("addAssetPath", String::class.java)
-        addAssetPath.invoke(assetManager, skinPath)
-        val superRes = mContext.resources
-        val resources = Resources(assetManager, superRes.displayMetrics, superRes.configuration)
+        val packageInfo: PackageInfo = getPackageInfo(skinPath)!!
+        packageInfo.applicationInfo.sourceDir = skinPath
+        packageInfo.applicationInfo.publicSourceDir = skinPath
+        val skinRes: Resources = mContext.packageManager.getResourcesForApplication(packageInfo.applicationInfo)
+        val oriRes = mContext.resources
+        val resources = Resources(skinRes.assets, oriRes.displayMetrics, oriRes.configuration)
         mResourceManager = ResourceManager(resources, skinPkgName, "")
         usePlugin = true
     }
@@ -69,7 +68,7 @@ object SkinManager {
 
     private fun getPackageInfo(skinPluginPath: String): PackageInfo? {
         val pm = mContext.packageManager
-        return pm.getPackageArchiveInfo(skinPluginPath, PackageManager.GET_ACTIVITIES)
+        return pm.getPackageArchiveInfo(skinPluginPath, 0)
     }
 
     private fun checkPluginParamsThrow(skinPath: String, skinPkgName: String) {
