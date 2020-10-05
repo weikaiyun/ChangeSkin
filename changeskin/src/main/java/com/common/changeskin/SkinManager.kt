@@ -46,14 +46,16 @@ object SkinManager {
     }
 
     private fun loadPlugin(skinPath: String, skinPkgName: String) {
-        val packageInfo: PackageInfo = getPackageInfo(skinPath)!!
-        packageInfo.applicationInfo.sourceDir = skinPath
-        packageInfo.applicationInfo.publicSourceDir = skinPath
-        val skinRes: Resources = mContext.packageManager.getResourcesForApplication(packageInfo.applicationInfo)
-        val oriRes = mContext.resources
-        val resources = Resources(skinRes.assets, oriRes.displayMetrics, oriRes.configuration)
-        mResourceManager = ResourceManager(resources, skinPkgName, "")
-        usePlugin = true
+        val packageInfo = getPackageInfo(skinPath)
+        packageInfo?.apply {
+            applicationInfo.sourceDir = skinPath
+            applicationInfo.publicSourceDir = skinPath
+            val skinRes: Resources = mContext.packageManager.getResourcesForApplication(applicationInfo)
+            val oriRes = mContext.resources
+            val resources = Resources(skinRes.assets, oriRes.displayMetrics, oriRes.configuration)
+            mResourceManager = ResourceManager(resources, skinPkgName, "")
+            usePlugin = true
+        }
     }
 
     private fun validPluginParams(skinPath: String, skinPkgName: String): Boolean {
