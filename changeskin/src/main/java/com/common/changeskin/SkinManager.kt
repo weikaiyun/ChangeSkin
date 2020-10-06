@@ -53,9 +53,8 @@ object SkinManager {
             applicationInfo.publicSourceDir = skinPath
             val oriRes = mContext.resources
             val skinRes: Resources = mContext.packageManager.getResourcesForApplication(applicationInfo)
-            require(skinRes.displayMetrics.equals(oriRes.displayMetrics)) { "displayMetrics is equal ! " }
-            require(skinRes.configuration.equals(oriRes.configuration)) { "configuration is equal ! " }
-            mResourceManager = ResourceManager(skinRes, skinPkgName, "")
+            val resources = Resources(skinRes.assets, oriRes.displayMetrics, oriRes.configuration)
+            mResourceManager = ResourceManager(resources, skinPkgName, "")
             usePlugin = true
         }
     }
