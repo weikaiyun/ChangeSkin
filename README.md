@@ -2,7 +2,23 @@
 
 简单方便的Android换肤库
 
-使用方式见Demo
+#### gradle使用:
+
+```
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
+```
+```
+dependencies {
+	//请使用最新版本
+	implementation 'com.github.weikaiyun:ChangeSkin:latest'
+}
+```
+##### demo有比较详细的使用示例， 欢迎star。
 
 #####  如有使用问题欢迎提交issues
 
