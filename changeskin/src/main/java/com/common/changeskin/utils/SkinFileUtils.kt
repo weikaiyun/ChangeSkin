@@ -1,4 +1,4 @@
-package com.common.weikaiyun.util
+package com.common.changeskin.utils
 
 import android.content.Context
 import android.os.Environment
@@ -8,8 +8,8 @@ import java.io.IOException
 import java.io.OutputStream
 
 object SkinFileUtils {
-    private fun getSkinDir(context: Context): String {
-        val skinDir = File(getCacheDir(context), SKIN_DEPLOY_PATH)
+    private fun getSkinDir(context: Context, deployPath: String): String {
+        val skinDir = File(getCacheDir(context), deployPath)
         if (!skinDir.exists()) {
             skinDir.mkdirs()
         }
@@ -26,10 +26,10 @@ object SkinFileUtils {
         return context.cacheDir.absolutePath
     }
 
-    private fun copySkinFromAssets(context: Context, name: String): String {
-        val skinPath = File(getSkinDir(context), name).absolutePath
+    private fun copySkinFromAssets(context: Context, deployPath: String, name: String): String {
+        val skinPath = File(getSkinDir(context, deployPath), name).absolutePath
         try {
-            val inStream = context.assets.open(SKIN_DEPLOY_PATH + File.separator + name)
+            val inStream = context.assets.open(deployPath + File.separator + name)
             val outStream: OutputStream = FileOutputStream(skinPath)
             var byteCount: Int
             val bytes = ByteArray(1024)
@@ -44,7 +44,7 @@ object SkinFileUtils {
         return skinPath
     }
 
-    fun getSkinPath(context: Context, skinName: String): String {
-        return copySkinFromAssets(context, skinName)
+    fun getSkinPath(context: Context, deployPath: String, skinPkgName: String): String {
+        return copySkinFromAssets(context, deployPath, skinPkgName)
     }
 }

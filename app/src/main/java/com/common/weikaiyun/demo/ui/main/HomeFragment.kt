@@ -7,7 +7,7 @@ import com.common.weikaiyun.R
 import com.common.weikaiyun.demo.DemoApplication
 import com.common.weikaiyun.demo.ui.base.BaseSupportFragment
 import com.common.weikaiyun.demo.ui.demo.DemoFragment1
-import com.common.weikaiyun.util.SkinFileUtils
+import com.common.changeskin.utils.SkinFileUtils
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment: BaseSupportFragment() {
@@ -20,12 +20,12 @@ class HomeFragment: BaseSupportFragment() {
         }
 
         tv_change_red.setOnClickListener {
-            val skinPkgPath = SkinFileUtils.getSkinPath(DemoApplication.context, "redskin-debug.apk")
+            val skinPkgPath = SkinFileUtils.getSkinPath(DemoApplication.context, "skins","redskin-debug.apk")
             SkinManager.changeSkin(skinPkgPath, "com.changeskin.redskin")
         }
 
         tv_change_green.setOnClickListener {
-            val skinPkgPath = SkinFileUtils.getSkinPath(DemoApplication.context, "greenskin-debug.apk")
+            val skinPkgPath = SkinFileUtils.getSkinPath(DemoApplication.context, "skins","greenskin-debug.apk")
             SkinManager.changeSkin(skinPkgPath, "com.changeskin.greenskin")
         }
     }
