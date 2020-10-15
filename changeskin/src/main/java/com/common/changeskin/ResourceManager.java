@@ -12,9 +12,9 @@ import com.common.changeskin.utils.L;
 public class ResourceManager {
     private static final String DEF_TYPE_DRAWABLE = "drawable";
     private static final String DEF_TYPE_COLOR = "color";
-    private Resources mResources;
-    private String mPluginPackageName;
-    private String mSuffix;
+    private final Resources mResources;
+    private final String mPluginPackageName;
+    private final String mSuffix;
 
 
     public ResourceManager(Resources res, String pluginPackageName, String suffix) {
